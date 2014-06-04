@@ -2,7 +2,7 @@
 ;Description: Publish-Overwrite previous deployment-Off
 ;
 ;Purpose: Creates a Java Project and publish in cloud with Staging target
-;Environment and Overwrite previous deplaoyment Off
+;Environment and Overwrite previous deployment Off
 ;
 ;Date: 3 June 2014
 ;Author: Ganesh
@@ -17,6 +17,7 @@
 #include <MsgBoxConstants.au3>
 #include <Array.au3>
 #include <IE.au3>
+#include <Clipboard.au3>
 ;******************************************
 
 ;***************************************************************
@@ -38,7 +39,7 @@ If @error = 1 Then
     MsgBox($MB_SYSTEMMODAL, "Error!", "Unable to Create the Excel Object")
     Exit
 ElseIf @error = 2 Then
-    MsgBox($MB_SYSTEMMODAL, "Error!", "File does not exist - Shame on you!")
+    MsgBox($MB_SYSTEMMODAL, "Error!", "File does not exist")
     Exit
 EndIf
 
@@ -68,8 +69,6 @@ Local $testCaseServiceName = _ExcelReadCell($oExcel, 6, 20)
 Local $testCaseTargetOS = _ExcelReadCell($oExcel, 6, 21)
 Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 6, 22)
 Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 6, 23)
-;Local $testCaseServiceNameUnPublish = _ExcelReadCell($oExcel, 5, 14)
-;Local $testCaseTargetEnvironmentUnPublish = _ExcelReadCell($oExcel, 5, 16)
 ;*******************************************************************************
 
 ;Opening instance of Eclipse
@@ -88,12 +87,32 @@ CreateAzurePackage()
 PublishToCloud()
 
 ;CHeck for published key word in Azure activity log
+;Do
+;Sleep(120000)
+;Local $string =  ControlGetText("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse","","[CLASS:SysLink]")
+;MsgBox ($MB_SYSTEMMODAL, "Do while", $string, 4 )
+;$cmp = StringRegExp($string,'<a>Published</a>',0)
+;until $cmp = 1
 Sleep(600000)
 Do
 Local $string =  ControlGetText("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse","","[CLASS:SysLink]")
 $cmp = StringRegExp($string,'<a>Published</a>',0)
 until $cmp = 1
-MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed")
+MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed",5)
+;Check in webpage
+;Send("{enter}")
+;Send("{F6}")
+;Send("^c")
+;Local $url = ClipGet();
+;Local $temp = $url & $testCaseProjectName
+;Local $oIE = _IECreate($temp, 1, 1,1,1)
+;_IELoadWait($oIE)
+;Local $readHTML = _IEBodyReadText($oIE)
+;Local $iCmp = StringRegExp($readHTML,$testCaseValidationText,0)
+;if $iCmp = 1 Then
+;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed")
+;EndIf
+
 
 ;***************************************************************
 ;Helper Functions
@@ -217,9 +236,14 @@ Send("{APPSKEY}")
 Send("{Down 21}")
 Send("{Right}")
 Send("{Enter}")
+
 WinWaitActive("Publish Wizard")
-Sleep(20000)
-while (ControlCommand("Publish Wizard","","[CLASS:Static]","IsVisible", "") = 0)
+Sleep(3000)
+while 1
+Dim $hnd =  WinGetText("Publish Wizard","")
+StringRegExp($hnd,"Loading Account Settings...",1)
+Local $reg = @error
+if $reg > 0 Then ExitLoop
 WEnd
 Send("{TAB}")
 
@@ -253,6 +277,10 @@ Local $cmp = StringCompare($testCaseCheckOverwrite,"UnCheck")
 	   ControlCommand("Publish Wizard","","[CLASSNN:Button4]","Check", "")
 	   sleep(3000)
 	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
+   Else
+	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
+	   sleep(3000)
+	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","Check", "")
    EndIf
 
 Send("{TAB 3}")

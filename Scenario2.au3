@@ -2,7 +2,7 @@
 ;Description: Publish-Overwrite previous deployment-ON
 ;
 ;Purpose: Creates a Java Project and publish in cloud with Staging target
-;Environment and Overwrite previous deplaoyment ON
+;Environment and Overwrite previous deployment ON and unpublish
 ;
 ;Date: 30 May 2014
 ;Author: Ganesh
@@ -17,6 +17,7 @@
 #include <MsgBoxConstants.au3>
 #include <Array.au3>
 #include <IE.au3>
+#include <Clipboard.au3>
 ;******************************************
 
 ;***************************************************************
@@ -38,38 +39,38 @@ If @error = 1 Then
     MsgBox($MB_SYSTEMMODAL, "Error!", "Unable to Create the Excel Object")
     Exit
 ElseIf @error = 2 Then
-    MsgBox($MB_SYSTEMMODAL, "Error!", "File does not exist - Shame on you!")
+    MsgBox($MB_SYSTEMMODAL, "Error!", "File does not exist!")
     Exit
 EndIf
 
 
 ; Reading xls data into variables
 ;to do - looping to get the data from desired row of xls
-Local $testCaseIteration = _ExcelReadCell($oExcel, 4, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 4, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 4, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 4, 4)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 4, 5)
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 4, 6)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 4, 7)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 4, 8)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 4, 9)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 4, 10)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 4, 11)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 4, 12)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 4, 13)
-Local $testCaseServerPath = _ExcelReadCell($oExcel, 4, 14)
-Local $testCaseServerNo = _ExcelReadCell($oExcel, 4, 15)
-Local $testCaseUrl = _ExcelReadCell($oExcel, 4, 16)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 4, 17)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 4, 12)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 4, 13)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 4, 14)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 4, 15)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 4, 16)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 4, 17)
-Local $testCaseServiceNameUnPublish = _ExcelReadCell($oExcel, 5, 14)
-Local $testCaseTargetEnvironmentUnPublish = _ExcelReadCell($oExcel, 5, 16)
+Local $testCaseIteration = _ExcelReadCell($oExcel, 5, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 5, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 5, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 5, 4)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 5, 5)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 5, 6)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 5, 7)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 5, 8)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 5, 9)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 5, 10)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 5, 11)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 5, 12)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 5, 13)
+Local $testCaseServerPath = _ExcelReadCell($oExcel, 5, 14)
+Local $testCaseServerNo = _ExcelReadCell($oExcel, 5, 15)
+Local $testCaseUrl = _ExcelReadCell($oExcel, 5, 16)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 5, 17)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 5, 18)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 5, 19)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 5, 20)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 5, 21)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 5, 22)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 5, 23)
+Local $testCaseServiceNameUnPublish = _ExcelReadCell($oExcel, 5, 20)
+Local $testCaseTargetEnvironmentUnPublish = _ExcelReadCell($oExcel, 5, 22)
 ;*******************************************************************************
 
 ;Opening instance of Eclipse
@@ -94,7 +95,7 @@ Local $string =  ControlGetText("Java EE - MyHelloWorld/WebContent/index.jsp - E
 $cmp = StringRegExp($string,'<a>Published</a>',0)
 until $cmp = 1
 
-
+; Unpublish from cloud
 UnPublish()
 MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed")
 
@@ -157,8 +158,9 @@ EndFunc
 ;***************************************************************
 Func CreateAzurePackage()
 WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
-Sleep(2000)
-MouseClick("right",88, 130, 1)
+Sleep(3000)
+MouseClick("primary",105, 395, 1)
+Send("{APPSKEY}")
 Send("{down 24}")
 Send("{right}")
 Send("{Enter}")
@@ -221,9 +223,13 @@ Send("{Right}")
 Send("{Enter}")
 
 WinWaitActive("Publish Wizard")
-Sleep(120000)
-;while (ControlCommand("New Azure Deployment Project","","[CLASSNN:Button1]","IsEnabled", "") = 0)
-;WEnd
+Sleep(3000)
+while 1
+Dim $hnd =  WinGetText("Publish Wizard","")
+StringRegExp($hnd,"Loading Account Settings...",1)
+Local $reg = @error
+if $reg > 0 Then ExitLoop
+WEnd
 Send("{TAB}")
 
 for $count = $testCaseSubscription to 1 step -1
@@ -256,6 +262,10 @@ Local $cmp = StringCompare($testCaseCheckOverwrite,"Check")
 	   ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
 	   sleep(3000)
 	  ControlCommand("New Azure Deployment Project","","[CLASSNN:Button4]","Check", "")
+   Else
+	   ControlCommand("Publish Wizard","","[CLASSNN:Button4]","Check", "")
+	   sleep(3000)
+	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
    EndIf
 
 Send("{TAB 3}")
@@ -274,18 +284,19 @@ Send("{Enter}")
 Sleep(3000)
 WinWaitActive("[Title:Unpublish]")
 
+sleep(5000)
 Send("{TAB}")
 for $count = $testCaseServiceNameUnPublish to 1 step -1
 Send("{Down}")
 Next
 
+sleep(5000)
 Send("{TAB}")
 for $count = $testCaseServiceNameUnPublish to 1 step -1
 Send("{Down}")
 Next
 Send("{TAB}")
 Send("{Enter}")
-
 EndFunc
 
 ;****************************************************************

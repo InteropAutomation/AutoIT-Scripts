@@ -1,10 +1,10 @@
 ;*******************************************************************
-;Description: Publish-Overwrite previous deployment-ON
+;Description: Publish-Overwrite previous deployment-Off
 ;
-;Purpose: Creates a Java Project and publish in cloud with Staging target
-;Environment and Overwrite previous deplaoyment ON
+;Purpose: Creates a Java Project and publish in cloud with Production target
+;Environment and Overwrite previous deployment Off
 ;
-;Date: 30 May 2014
+;Date: 4 Jun 2014
 ;Author: Ganesh
 ;Company: Brillio
 ;*********************************************************************
@@ -41,34 +41,33 @@ If @error = 1 Then
 ElseIf @error = 2 Then
     MsgBox($MB_SYSTEMMODAL, "Error!", "File does not exist")
     Exit
-EndIf
+ EndIf
 
-
-; Reading xls data into variables
+ ; Reading xls data into variables
 ;to do - looping to get the data from desired row of xls
-Local $testCaseIteration = _ExcelReadCell($oExcel, 4, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 4, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 4, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 4, 4)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 4, 5)
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 4, 6)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 4, 7)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 4, 8)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 4, 9)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 4, 10)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 4, 11)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 4, 12)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 4, 13)
-Local $testCaseServerPath = _ExcelReadCell($oExcel, 4, 14)
-Local $testCaseServerNo = _ExcelReadCell($oExcel, 4, 15)
-Local $testCaseUrl = _ExcelReadCell($oExcel, 4, 16)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 4, 17)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 4, 18)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 4, 19)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 4, 20)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 4, 21)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 4, 22)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 4, 23)
+Local $testCaseIteration = _ExcelReadCell($oExcel, 8, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 8, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 8, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 8, 4)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 8, 5)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 8, 6)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 8, 7)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 8, 8)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 8, 9)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 8, 10)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 8, 11)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 8, 12)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 8, 13)
+Local $testCaseServerPath = _ExcelReadCell($oExcel, 8, 14)
+Local $testCaseServerNo = _ExcelReadCell($oExcel, 8, 15)
+Local $testCaseUrl = _ExcelReadCell($oExcel, 8, 16)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 8, 17)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 8, 18)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 8, 19)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 8, 20)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 8, 21)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 8, 22)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 8, 23)
 ;*******************************************************************************
 
 ;Opening instance of Eclipse
@@ -112,7 +111,6 @@ MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed",5)
 ;if $iCmp = 1 Then
 ;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed")
 ;EndIf
-
 
 ;***************************************************************
 ;Helper Functions
@@ -272,18 +270,21 @@ Send("{Down}")
 Next
 
 Send("{TAB}")
-Local $cmp = StringCompare($testCaseCheckOverwrite,"Check")
+Local $cmp = StringCompare($testCaseCheckOverwrite,"UnCheck")
    if $cmp = 0 Then
-	   ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
-	   sleep(3000)
-	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","Check", "")
-   Else
 	   ControlCommand("Publish Wizard","","[CLASSNN:Button4]","Check", "")
 	   sleep(3000)
 	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
+   Else
+	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","UnCheck", "")
+	   sleep(3000)
+	  ControlCommand("Publish Wizard","","[CLASSNN:Button4]","Check", "")
    EndIf
 
 Send("{TAB 3}")
 Send("{Enter}")
 EndFunc
-;*******************************************************************************
+;***************************************************************************
+
+
+
