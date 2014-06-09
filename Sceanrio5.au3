@@ -99,6 +99,7 @@ $cmp = StringRegExp($string,'<a>Published</a>',0)
 until $cmp = 1
 MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed",5)
 ;Check in webpage
+;Send("{TAB}")
 ;Send("{enter}")
 ;Send("{F6}")
 ;Send("^c")
@@ -110,6 +111,8 @@ MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed",5)
 ;Local $iCmp = StringRegExp($readHTML,$testCaseValidationText,0)
 ;if $iCmp = 1 Then
 ;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed")
+;Else
+;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Failed")
 ;EndIf
 
 ;***************************************************************
@@ -160,8 +163,8 @@ Sleep(3000)
 WinWaitActive($temp)
 Send("{down 9}")
 Send($testCaseJspText)
-Send("{right 4}")
-Send("{BACKSPACE 8}")
+;Send("{right 4}")
+;Send("{BACKSPACE 8}")
 Send("^+s")
 EndFunc
 ;******************************************************************
@@ -174,7 +177,11 @@ WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
 Sleep(3000)
 MouseClick("primary",105, 395, 1)
 Send("{APPSKEY}")
-Send("{down 24}")
+Sleep(1000)
+Send("e")
+Send("{Left}")
+Send("{UP}")
+;Send("{down 24}")
 Send("{right}")
 Send("{Enter}")
 WinWaitActive("[Title:New Azure Deployment Project]")
@@ -214,7 +221,7 @@ send("{BACKSPACE}")
 Send($testCaseServerPath)
 Send("{TAB 2}")
 
- for $count = $testCaseServerNo to 1 step -1
+ for $count = $testCaseServerNo to 0 step -1
    Send("{Down}")
 Next
 
@@ -231,7 +238,11 @@ Sleep(2000)
 WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
 Send("{Up}")
 Send("{APPSKEY}")
-Send("{Down 21}")
+Sleep(1000)
+Send("e")
+Send("{Left}")
+Send("{UP}")
+;Send("{Down 21}")
 Send("{Right}")
 Send("{Enter}")
 

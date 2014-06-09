@@ -69,8 +69,8 @@ Local $testCaseServiceName = _ExcelReadCell($oExcel, 5, 20)
 Local $testCaseTargetOS = _ExcelReadCell($oExcel, 5, 21)
 Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 5, 22)
 Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 5, 23)
-Local $testCaseServiceNameUnPublish = _ExcelReadCell($oExcel, 5, 20)
-Local $testCaseTargetEnvironmentUnPublish = _ExcelReadCell($oExcel, 5, 22)
+Local $testCaseServiceNameUnPublish = _ExcelReadCell($oExcel, 5, 24)
+Local $testCaseTargetEnvironmentUnPublish = _ExcelReadCell($oExcel, 5, 25)
 ;*******************************************************************************
 
 ;Opening instance of Eclipse
@@ -147,8 +147,8 @@ Sleep(3000)
 WinWaitActive($temp)
 Send("{down 9}")
 Send($testCaseJspText)
-Send("{right 4}")
-Send("{BACKSPACE 8}")
+;Send("{right 4}")
+;Send("{BACKSPACE 8}")
 Send("^+s")
 EndFunc
 ;******************************************************************
@@ -161,7 +161,11 @@ WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
 Sleep(3000)
 MouseClick("primary",105, 395, 1)
 Send("{APPSKEY}")
-Send("{down 24}")
+Sleep(1000)
+Send("e")
+Send("{Left}")
+Send("{UP}")
+;Send("{down 24}")
 Send("{right}")
 Send("{Enter}")
 WinWaitActive("[Title:New Azure Deployment Project]")
@@ -201,7 +205,7 @@ send("{BACKSPACE}")
 Send($testCaseServerPath)
 Send("{TAB 2}")
 
- for $count = $testCaseServerNo to 1 step -1
+ for $count = $testCaseServerNo to 0 step -1
    Send("{Down}")
 Next
 
@@ -218,7 +222,11 @@ Sleep(2000)
 WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
 Send("{Up}")
 Send("{APPSKEY}")
-Send("{Down 21}")
+Sleep(1000)
+Send("e")
+Send("{Left}")
+Send("{UP}")
+;Send("{Down 21}")
 Send("{Right}")
 Send("{Enter}")
 
@@ -277,10 +285,20 @@ EndFunc
 ;Function to unpublish from cloud
 ;****************************************************************
 Func UnPublish()
+Sleep(2000)
+MouseClick("primary",105, 395, 1)
+Send("{Up}")
+Send("{APPSKEY}")
 Sleep(1000)
-Send("{TAB 3}")
-Send("{RIGHT 5}")
+Send("e")
+Send("{Left}")
+Send("{UP}")
+;Send("{Down 21}")
+Send("{RIGHT}")
+Send("{Down}")
 Send("{Enter}")
+
+
 Sleep(3000)
 WinWaitActive("[Title:Unpublish]")
 
@@ -292,7 +310,7 @@ Next
 
 sleep(5000)
 Send("{TAB}")
-for $count = $testCaseServiceNameUnPublish to 1 step -1
+for $count = $testCaseTargetEnvironmentUnPublish to 1 step -1
 Send("{Down}")
 Next
 Send("{TAB}")
