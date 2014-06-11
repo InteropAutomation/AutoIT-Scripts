@@ -198,18 +198,20 @@ Local $cmp = StringCompare($testCaseCheckJdk,"Check")
 	  ControlCommand("New Azure Deployment Project","","[CLASSNN:Button5]","Check", "")
    EndIf
 
-Send("{TAB 3}")
-Send("{Down}")
 Send("{TAB}")
+Send($testCaseJdkPath)
+;Send("{TAB 3}")
+;Send("{Down}")
+;Send("{TAB}")
 
-for $count = $testCaseJDKOnCloud to 1 step -1
-Send("{Down}")
-Next
+;for $count = $testCaseJDKOnCloud to 1 step -1
+;Send("{Down}")
+;Next
 
 Send("!N")
-WinWaitActive("[Title:Accept License Agreement]")
-Send("{TAB}")
-Send("{Enter}")
+;WinWaitActive("[Title:Accept License Agreement]")
+;Send("{TAB}")
+;Send("{Enter}")
 
 ;Server Configuration
 sleep(3000)
