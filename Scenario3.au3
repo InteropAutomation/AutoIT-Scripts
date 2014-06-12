@@ -4,7 +4,7 @@
 ;Purpose: Creates a Java Project and publish in cloud with Staging target
 ;Environment and Overwrite previous deployment Off
 ;
-;Date: 3 June 2014 , Modified on 11 June 2014
+;Date: 3 June 2014 , Modified on 12 June 2014
 ;Author: Ganesh
 ;Company: Brillio
 ;*********************************************************************
@@ -94,7 +94,7 @@ CreateAzurePackage()
 PublishToCloud()
 
 ;Wait for 10 min RDP screen
-Sleep(480000)
+Sleep(540000)
 
 ;Check RDP and Open excel
 CheckRDPConnection()
@@ -199,19 +199,11 @@ Local $cmp = StringCompare($testCaseCheckJdk,"Check")
    EndIf
 
 Send("{TAB}")
+Send("+")
+Send("{End}")
+Send("{BACKSPACE}")
 Send($testCaseJdkPath)
-;Send("{TAB 3}")
-;Send("{Down}")
-;Send("{TAB}")
-
-;for $count = $testCaseJDKOnCloud to 1 step -1
-;Send("{Down}")
-;Next
-
 Send("!N")
-;WinWaitActive("[Title:Accept License Agreement]")
-;Send("{TAB}")
-;Send("{Enter}")
 
 ;Server Configuration
 sleep(3000)

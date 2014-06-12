@@ -1,11 +1,10 @@
 ;*******************************************************************
-;Description: Publish-with different 3rd party JDK package available on azure
-;and server
+;Description: Caching
 ;
 ;Purpose: Creates a Java Project and publish in cloud with staging target
 ;Environment and Overwrite previous deployment
 ;
-;Date: 10 Jun 2014 , Modified on 12 June 2014
+;Date: 12 Jun 2014 , Modified on 13 June 2014
 ;Author: Ganesh
 ;Company: Brillio
 ;*********************************************************************
@@ -46,32 +45,33 @@ ElseIf @error = 2 Then
 
  ; Reading xls data into variables
 ;to do - looping to get the data from desired row of xls
-Local $testCaseIteration = _ExcelReadCell($oExcel, 9, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 9, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 9, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 9, 4)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 9, 5)
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 9, 6)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 9, 7)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 9, 8)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 9, 9)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 9, 10)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 9, 11)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 9, 12)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 9, 13)
-Local $testCaseServerPath = _ExcelReadCell($oExcel, 9, 14)
-Local $testCaseServerNo = _ExcelReadCell($oExcel, 9, 15)
-Local $testCaseUrl = _ExcelReadCell($oExcel, 9, 16)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 9, 17)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 9, 18)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 9, 19)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 9, 20)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 9, 21)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 9, 22)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 9, 23)
-Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 9, 26)
-Local $testCaseUserName = _ExcelReadCell($oExcel, 9, 27)
-Local $testCasePassword = _ExcelReadCell($oExcel, 9, 28)
+Local $testCaseIteration = _ExcelReadCell($oExcel, 15, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 15, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 15, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 15, 4)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 15, 5)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 15, 6)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 15, 7)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 15, 8)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 15, 9)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 15, 10)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 15, 11)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 15, 12)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel,15, 13)
+Local $testCaseServerPath = _ExcelReadCell($oExcel,15, 14)
+Local $testCaseServerNo = _ExcelReadCell($oExcel,15, 15)
+Local $testCaseUrl = _ExcelReadCell($oExcel,15, 16)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 15, 17)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 15, 18)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel,15, 19)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 15, 20)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 15, 21)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 15, 22)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 15, 23)
+Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 15, 26)
+Local $testCaseUserName = _ExcelReadCell($oExcel, 15, 27)
+Local $testCasePassword = _ExcelReadCell($oExcel, 15, 28)
+Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 15, 29)
 _ExcelBookClose($oExcel,0)
 ;*******************************************************************************
 
@@ -131,8 +131,6 @@ WinWaitActive("[Title:New Dynamic Web Project]")
 AutoItSetOption ( "SendKeyDelay", 50)
 Send($testCaseProjectName)
 AutoItSetOption ( "SendKeyDelay", 400)
-;Send("{TAB 10}")
-;Send("{Enter}")
 Send("!f")
 WinWaitActive("[Title:Java EE - Eclipse]")
 EndFunc
@@ -143,25 +141,21 @@ EndFunc
 ;***************************************************************
 Func CreateJSPFile()
 sleep(3000)
-Send("{APPSKEY}")
 AutoItSetOption ( "SendKeyDelay", 100)
+Send("{APPSKEY}")
 Send("{down}")
 Send("{RIGHT}")
 Send("{down 14}")
 Send("{enter}")
 Send($testCaseJspName)
-;Send("{TAB 3}")
-;Send("{Enter}")
 Send("!f")
 Local $temp = "Java EE - " & $testCaseProjectName & "/WebContent/" & $testCaseJspName & " - Eclipse"
-Sleep(3000)
+Sleep(2000)
 WinWaitActive($temp)
-AutoItSetOption ( "SendKeyDelay", 100)
-Send("{down 9}")
-Send($testCaseJspText)
-AutoItSetOption ( "SendKeyDelay", 400)
-Send("{right 1}")
-Send("{BACKSPACE}")
+Send("^a")
+Send("{Backspace}")
+ClipPut($testCaseJspText)
+Send("^v")
 Send("^+s")
 EndFunc
 ;******************************************************************
@@ -170,11 +164,16 @@ EndFunc
 ;Function to create Azure project
 ;***************************************************************
 Func CreateAzurePackage()
-WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
+WinWaitActive("Java EE - MyHelloWorld/WebContent/newsession.jsp - Eclipse")
 Sleep(3000)
 MouseClick("primary",105, 395, 1)
 Send("{APPSKEY}")
 Sleep(1000)
+Send("b")
+Send("c")
+WinWaitActive("Properties for MyHelloWorld")
+
+
 Send("e")
 Send("{Left}")
 Send("{UP}")
@@ -196,19 +195,13 @@ Local $cmp = StringCompare($testCaseCheckJdk,"Check")
 	   sleep(2000)
 	  ControlCommand("New Azure Deployment Project","","[CLASSNN:Button5]","Check", "")
    EndIf
-
-Send("{TAB 3}")
-Send("{Down}")
+AutoItSetOption ( "SendKeyDelay", 100)
 Send("{TAB}")
-
-for $count = $testCaseJDKOnCloud to 1 step -1
-Send("{Down}")
-Next
-
+Send("+")
+Send("{End}")
+Send("{BACKSPACE}")
+Send($testCaseJdkPath)
 Send("!N")
-WinWaitActive("[Title:Accept License Agreement]")
-Send("{TAB}")
-Send("{Enter}")
 
 ;Server Configuration
 sleep(3000)
@@ -222,7 +215,6 @@ Send("{TAB}")
 Send("+")
 Send("{END}")
 send("{BACKSPACE}")
-AutoItSetOption ( "SendKeyDelay", 100)
 Send($testCaseServerPath)
 AutoItSetOption ( "SendKeyDelay", 400)
 Send("{TAB 2}")
@@ -230,17 +222,19 @@ Send("{TAB 2}")
  for $count = $testCaseServerNo to 0 step -1
    Send("{Down}")
 Next
-
+Send("!N")
+Send("!N")
+ControlCommand("New Azure Deployment Project","","[CLASSNN:Button16]","Check", "")
 Send("!F")
 EndFunc
-;**************************************************************************************
+;******************************************************************
 
 ;*****************************************************************
 ;Function to publish to cloud
 ;****************************************************************
 Func PublishToCloud()
 Sleep(2000)
-WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
+WinWaitActive("Java EE - MyHelloWorld/WebContent/newsession.jsp - Eclipse")
 Send("{Up}")
 Send("{APPSKEY}")
 Sleep(1000)
@@ -355,7 +349,7 @@ EndFunc
 Func ValidateTextAndUpdateExcel()
 MouseClick("primary",565, 632, 1)
 
-Local $string =  ControlGetText("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse","","[CLASS:SysLink]")
+Local $string =  ControlGetText("Java EE - MyHelloWorld/WebContent/newsession.jsp - Eclipse","","[CLASS:SysLink]")
 $cmp = StringRegExp($string,'<a>Published</a>',0)
 
 ;Check in webpage and update excel
