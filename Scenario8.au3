@@ -72,6 +72,7 @@ Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 15, 26)
 Local $testCaseUserName = _ExcelReadCell($oExcel, 15, 27)
 Local $testCasePassword = _ExcelReadCell($oExcel, 15, 28)
 Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 15, 29)
+Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 15, 30)
 _ExcelBookClose($oExcel,0)
 ;*******************************************************************************
 
@@ -86,8 +87,14 @@ CreateJavaProject()
 ;Creating JSP file and insert code
 CreateJSPFile()
 
-;CreateAzurePackage
+;Adding External JAR FileChangeDir
+AddExternalJarFile()
+
+;Create Azure Package
 CreateAzurePackage()
+
+;Enable co-located caching
+EnableCoLocatedCaching()
 
 ;Publish to Cloud
 PublishToCloud()
@@ -161,10 +168,11 @@ EndFunc
 ;******************************************************************
 
 ;***************************************************************
-;Function to create Azure project
+;Function to add external JAR file
 ;***************************************************************
-Func CreateAzurePackage()
-WinWaitActive("Java EE - MyHelloWorld/WebContent/newsession.jsp - Eclipse")
+Func AddExternalJarFile()
+AutoItSetOption ( "SendKeyDelay", 200)
+WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
 Sleep(3000)
 MouseClick("primary",105, 395, 1)
 Send("{APPSKEY}")
@@ -172,14 +180,42 @@ Sleep(1000)
 Send("b")
 Send("c")
 WinWaitActive("Properties for MyHelloWorld")
+Send("!x")
+ClipPut($testcaseExternalJarPath)
+Send("^v")
+Send("!o")
 
+for $shiftTab = 5 To 1 step -1
+Send("+")
+Send("{TAB}")
+Next
 
-Send("e")
-Send("{Left}")
 Send("{UP}")
-;Send("{down 24}")
-Send("{right}")
+WinWaitActive("Setting Java Build Path")
 Send("{Enter}")
+Send("!d")
+WinWaitActive("New Assembly Directive")
+Send("{down 4}")
+Send("!n")
+WinWaitActive("New Assembly Directive")
+Send("{TAB 3}")
+Send("{Space}")
+Send("!f")
+Send("!a")
+Send("{TAB}{ENTER}")
+EndFunc
+
+
+;***************************************************************
+;Function to create Azure project
+;***************************************************************
+Func CreateAzurePackage()
+WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
+MouseClick("primary",105, 395, 1)
+Send("{APPSKEY}")
+Sleep(1000)
+Send("e")
+Send("{Left}{UP}{right}{Enter}")
 WinWaitActive("[Title:New Azure Deployment Project]")
 AutoItSetOption ( "SendKeyDelay", 50)
 Send($testCaseAzureProjectName)
@@ -219,23 +255,39 @@ Send($testCaseServerPath)
 AutoItSetOption ( "SendKeyDelay", 400)
 Send("{TAB 2}")
 
- for $count = $testCaseServerNo to 0 step -1
-   Send("{Down}")
+for $count = $testCaseServerNo to 0 step -1
+Send("{Down}")
 Next
 Send("!N")
 Send("!N")
-ControlCommand("New Azure Deployment Project","","[CLASSNN:Button16]","Check", "")
+ControlCommand("New Azure Deployment Project","","[CLASSNN:Button17]","Check", "")
 Send("!F")
 EndFunc
 ;******************************************************************
+
+;***************************************************************
+;Function to enable co-located caching
+;***************************************************************
+Func EnableCoLocatedCaching()
+Send("{UP}{ENTER}")
+Send("{DOWN 3}")
+Send("{APPSKEY}")
+Sleep(1000)
+Send("e")
+Send("{Left}{UP}{right}{down}{Enter}")
+WinWaitActive("[Title:Properties for WorkerRole1]")
+ControlCommand("Properties for WorkerRole1","","[CLASSNN:Button1]","Check", "")
+Send("{TAB 8}")
+Send("{Enter}")
+EndFunc
 
 ;*****************************************************************
 ;Function to publish to cloud
 ;****************************************************************
 Func PublishToCloud()
 Sleep(2000)
-WinWaitActive("Java EE - MyHelloWorld/WebContent/newsession.jsp - Eclipse")
-Send("{Up}")
+WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
+Send("{Up 3}")
 Send("{APPSKEY}")
 Sleep(1000)
 Send("e")
