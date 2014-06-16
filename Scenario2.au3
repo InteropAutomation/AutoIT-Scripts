@@ -107,7 +107,12 @@ ValidateTextAndUpdateExcel()
 ;Unpublish from cloud
 UnPublish()
 
-MsgBox("", "TestResult", "Pass", 3)
+_ExcelWriteCell($oExcel, "Test Passed" , 2, 3)
+;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Failed")
+
+Local $flag = _ExcelBookSaveAs($oExcel, @ScriptDir & "\" & $testCaseName & "Result", "xls",0,1)
+If Not @error Then MsgBox($MB_SYSTEMMODAL, "Success", "File was Saved!", 3)
+_ExcelBookClose($oExcel, 1, 0)
 ;to do - Post validation steps
 
 ;***************************************************************
@@ -383,17 +388,17 @@ ElseIf @error = 2 Then
     Exit
  EndIf
 
-if $iCmp = 1 Then
+;if $iCmp = 1 Then
 ;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Passed")
-_ExcelWriteCell($oExcel, "Test Passed" , 2, 3)
-Else
+;_ExcelWriteCell($oExcel, "Test Passed" , 2, 3)
+;Else
 ;MsgBox ($MB_SYSTEMMODAL, "Test Result", "Test Failed")
-_ExcelWriteCell($oExcel, "Test Failed" , 2, 3)
-EndIf
+;_ExcelWriteCell($oExcel, "Test Failed" , 2, 3)
+;EndIf
 
-Local $flag = _ExcelBookSaveAs($oExcel, @ScriptDir & "\" & $testCaseName & "Result", "xls",0,1)
-If Not @error Then MsgBox($MB_SYSTEMMODAL, "Success", "File was Saved!", 3)
-_ExcelBookClose($oExcel, 1, 0)
+;Local $flag = _ExcelBookSaveAs($oExcel, @ScriptDir & "\" & $testCaseName & "Result", "xls",0,1)
+;If Not @error Then MsgBox($MB_SYSTEMMODAL, "Success", "File was Saved!", 3)
+;_ExcelBookClose($oExcel, 1, 0)
 EndFunc
 ;*******************************************************************************
 
@@ -421,6 +426,7 @@ WinWaitActive("[Title:Unpublish]")
 sleep(5000)
 Send("{TAB}")
 for $count = $testCaseServiceNameUnPublish to 1 step -1
+sleep(5000)
 Send("{Down}")
 Next
 
