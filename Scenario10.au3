@@ -1,9 +1,9 @@
 ;*******************************************************************
-;Description: SSL Overloading
+;Description: Session Affinity and SSL Overloading
 ;
 ;Purpose:
 ;
-;Date: 18 Jun 2014 , Modified on 19 June 2014
+;Date: 19 Jun 2014
 ;Author: Ganesh
 ;Company: Brillio
 ;*********************************************************************
@@ -44,35 +44,35 @@ ElseIf @error = 2 Then
 
  ; Reading xls data into variables
 ;to do - looping to get the data from desired row of xls
-Local $testCaseIteration = _ExcelReadCell($oExcel, 16, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 16, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 16, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 16, 4)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 16, 5)
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 16, 6)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 16, 7)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 16, 8)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 16, 9)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 16, 10)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 16, 11)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 16, 12)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel,16, 13)
-Local $testCaseServerPath = _ExcelReadCell($oExcel,16, 14)
-Local $testCaseServerNo = _ExcelReadCell($oExcel,16, 15)
-Local $testCaseUrl = _ExcelReadCell($oExcel,16, 16)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 16, 17)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 16, 18)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel,16, 19)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 16, 20)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 16, 21)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 16, 22)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 16, 23)
-Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 16, 26)
-Local $testCaseUserName = _ExcelReadCell($oExcel, 16, 27)
-Local $testCasePassword = _ExcelReadCell($oExcel, 16, 28)
-Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 16, 29)
-Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 16, 30)
-Local $testcaseCertificatePath = _ExcelReadCell($oExcel, 16, 31)
+Local $testCaseIteration = _ExcelReadCell($oExcel, 17, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 17, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 17, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 17, 4)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 17, 5)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 17, 6)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 17, 7)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 17, 8)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 17, 9)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 17, 10)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 17, 11)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 17, 12)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel,17, 13)
+Local $testCaseServerPath = _ExcelReadCell($oExcel,17, 14)
+Local $testCaseServerNo = _ExcelReadCell($oExcel,17, 15)
+Local $testCaseUrl = _ExcelReadCell($oExcel,17, 16)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 17, 17)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 17, 18)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel,17, 19)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 17, 20)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 17, 21)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 17, 22)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 17, 23)
+Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 17, 26)
+Local $testCaseUserName = _ExcelReadCell($oExcel, 17, 27)
+Local $testCasePassword = _ExcelReadCell($oExcel, 17, 28)
+Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 17, 29)
+Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 17, 30)
+Local $testcaseCertificatePath = _ExcelReadCell($oExcel, 17, 31)
 _ExcelBookClose($oExcel,0)
 ;*******************************************************************************
 
