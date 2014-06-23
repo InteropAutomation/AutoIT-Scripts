@@ -32,7 +32,7 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;To do - move helper function
 ;******************************************************************
 ;Open xls
-Local $sFilePath1 = "D:\MS\Interop\TestData.xls" ;This file should already exist in the mentioned path
+Local $sFilePath1 = "C:\Users\Babu\Documents\AutoIT-Script\TestData.xls" ;This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
 
 ;Check for error
@@ -94,7 +94,7 @@ CreateAzurePackage()
 PublishToCloud()
 
 ;Wait for 10 min RDP screen
-Sleep(540000)
+Sleep(600000)
 
 ;Check RDP and Open excel
 CheckRDPConnection()
@@ -159,10 +159,10 @@ Sleep(3000)
 WinWaitActive($temp)
 AutoItSetOption ( "SendKeyDelay", 100)
 Send("{down 9}")
-Send($testCaseJspText)
+;Send($testCaseJspText)
+ClipPut($testCaseJspText)
+Send("^v")
 AutoItSetOption ( "SendKeyDelay", 400)
-Send("{right 1}")
-Send("{BACKSPACE}")
 Send("^+s")
 EndFunc
 ;******************************************************************
@@ -332,7 +332,7 @@ _ExcelWriteCell($oExcel, "Test Result" , 1, 3)
 
 if $RDPWindow = 1 Then
 _ExcelWriteCell($oExcel, "Yes", 2, 2)
-Send("{TAB 3}")
+Send("{TAB 4}")
 Send("{Enter}")
 Else
 _ExcelWriteCell($oExcel, "No", 2, 2)

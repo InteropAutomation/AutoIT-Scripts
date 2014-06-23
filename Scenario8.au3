@@ -31,7 +31,7 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;To do - move helper function
 ;******************************************************************
 ;Open xls
-Local $sFilePath1 = "D:\MS\Interop\TestData.xls" ;This file should already exist in the mentioned path
+Local $sFilePath1 = "C:\Users\Babu\Documents\AutoIT-Script\TestData.xls" ;This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
 
 ;Check for error
@@ -100,7 +100,7 @@ EnableCoLocatedCaching()
 PublishToCloud()
 
 ;Wait for 10 min RDP screen
-Sleep(540000)
+Sleep(600000)
 
 ;Check RDP and Open excel
 CheckRDPConnection()
@@ -181,6 +181,7 @@ Send("b")
 Send("c")
 WinWaitActive("Properties for MyHelloWorld")
 Send("!x")
+WinWaitActive("JAR Selection")
 ClipPut($testcaseExternalJarPath)
 Send("^v")
 Send("!o")
@@ -193,6 +194,7 @@ Next
 Send("{UP}")
 WinWaitActive("Setting Java Build Path")
 Send("{Enter}")
+WinWaitActive("Properties for MyHelloWorld")
 Send("!d")
 WinWaitActive("New Assembly Directive")
 Send("{down 4}")
@@ -269,6 +271,7 @@ EndFunc
 ;Function to enable co-located caching
 ;***************************************************************
 Func EnableCoLocatedCaching()
+Sleep(2000)
 Send("{UP}{ENTER}")
 Send("{DOWN 3}")
 Send("{APPSKEY}")

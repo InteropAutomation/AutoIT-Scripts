@@ -32,7 +32,7 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;To do - move helper function
 ;******************************************************************
 ;Open xls
-Local $sFilePath1 = "D:\MS\Interop\TestData.xls" ;This file should already exist in the mentioned path
+Local $sFilePath1 = "C:\Users\Babu\Documents\TestData.xls" ;This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
 
 ;Check for error
@@ -170,10 +170,10 @@ Sleep(3000)
 WinWaitActive($temp)
 AutoItSetOption ( "SendKeyDelay", 100)
 Send("{down 9}")
-Send($testCaseJspText)
+;Send($testCaseJspText)
+ClipPut($testCaseJspText)
+Send("^v")
 AutoItSetOption ( "SendKeyDelay", 400)
-Send("{right 1}")
-Send("{BACKSPACE}")
 Send("^+s")
 EndFunc
 ;******************************************************************

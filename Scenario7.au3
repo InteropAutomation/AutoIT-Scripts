@@ -31,7 +31,7 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;To do - move helper function
 ;******************************************************************
 ;Open xls
-Local $sFilePath1 = "D:\MS\Interop\TestData.xls" ;This file should already exist in the mentioned path
+Local $sFilePath1 = "C:\Users\Babu\Documents\AutoIT-Script\TestData.xls" ;This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
 
 ;Check for error
@@ -93,7 +93,7 @@ CreateAzurePackage()
 PublishToCloud()
 
 ;Wait for 10 min RDP screen
-Sleep(540000)
+Sleep(600000)
 
 ;Check RDP and Open excel
 CheckRDPConnection()
@@ -161,11 +161,10 @@ Send("^v")
 Send("^+s")
 
 ;create newsession.jsp
-Sleep(1000)
 MouseClick("primary",105, 395, 1)
 Send("{APPSKEY}")
-Send("{down}")
-Send("{RIGHT}")
+Sleep(1000)
+Send("n")
 Send("{down 14}")
 Send("{enter}")
 Send("newsession.jsp")
