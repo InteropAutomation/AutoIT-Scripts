@@ -1,4 +1,3 @@
-;*******************************************************************
 ;Description: Caching
 ;
 ;Purpose: Creates a Java Project and publish in cloud with staging target
@@ -43,7 +42,7 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;Open xls
 Local $sFilePath1 =  @ScriptDir & "\" & "TestData.xlsx" ;This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
-Dim $oExcel1 = _ExcelBookNew(0)
+;Dim $oExcel1 = _ExcelBookNew(0)
 
 ;Local $sFilePath2 = @ScriptDir & "\" & "Result.xlsx"  ;This file should already exist in the mentioned path
 ;Local $oExcel1 = _ExcelBookOpen($sFilePath2,0,False)
@@ -57,53 +56,52 @@ ElseIf @error = 2 Then
  EndIf
 
  ; Reading xls data into variables
-;to do - looping to get the data from desired row of xls; Reading xls data into variables
-
-Local $testCaseIteration = _ExcelReadCell($oExcel, 11, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 11, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 11, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 11, 4)
-Local $JunoOrKep  = _ExcelReadCell($oExcel, 11, 5)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 11, 6)
+;to do - looping to get the data from desired row of xls
+;to do - looping to get the data from desired row of xls
+Local $testCaseIteration = _ExcelReadCell($oExcel, 18, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 18, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 18, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 18, 4)
+Local $JunoOrKep  = _ExcelReadCell($oExcel, 18, 5)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 18, 6)
 ;if $JunoOrKep = "Juno" Then
   ; Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 16, 6)
 ;Else
    ;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 16, 7)
    ;EndIf
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 11, 8)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 11, 9)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 11, 10)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 11, 11)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 11, 12)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 11, 13)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 11, 14)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 11, 15)
-Local $testCaseServerPath = _ExcelReadCell($oExcel, 11, 16)
-Local $testCaseServerNo = _ExcelReadCell($oExcel, 11, 17)
-Local $testCaseUrl = _ExcelReadCell($oExcel, 11, 19)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 11, 19)
-Local $emulatorURL = _ExcelReadCell($oExcel, 11, 18)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 11, 20)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 11, 21)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 11, 22)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 11, 23)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 11, 24)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 11, 25)
-Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 11, 28)
-Local $testCaseUserName = _ExcelReadCell($oExcel, 11, 29)
-Local $testCasePassword = _ExcelReadCell($oExcel, 11, 30)
-Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 11, 31)
-Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 11, 32)
-Local $testcaseCertificatePath = _ExcelReadCell($oExcel, 11, 33)
-Local $testcaseACSLoginUrlPath = _ExcelReadCell($oExcel, 11, 34)
-Local $testcaseACSserverUrlPath = _ExcelReadCell($oExcel, 11, 35)
-Local $testcaseACSCertiPath = _ExcelReadCell($oExcel, 11, 36)
-Local $testcaseCloud = _ExcelReadCell($oExcel, 11, 37)
-Local $lcl = _ExcelReadCell($oExcel, 11, 38)
-Local $tJDK = _ExcelReadCell($oExcel, 11, 39)
-Local $PFXpath = _ExcelReadCell($oExcel, 11, 40)
-Local $PFXpassword = _ExcelReadCell($oExcel, 11, 41)
-Local $PSFile = _ExcelReadCell($oExcel, 11, 42)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 18, 8)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 18, 9)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 18, 10)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 18, 11)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 18, 12)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 18, 13)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 18, 14)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 18, 15)
+Local $testCaseServerPath = _ExcelReadCell($oExcel, 18, 16)
+Local $testCaseServerNo = _ExcelReadCell($oExcel, 18, 17)
+Local $testCaseUrl = _ExcelReadCell($oExcel, 18, 19)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 18, 19)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 18, 20)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 18, 21)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 18, 22)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 18, 23)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 18, 24)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 18, 25)
+Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 18, 28)
+Local $testCaseUserName = _ExcelReadCell($oExcel, 18, 29)
+Local $testCasePassword = _ExcelReadCell($oExcel, 18, 30)
+Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 18, 31)
+Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 18, 32)
+Local $testcaseCertificatePath = _ExcelReadCell($oExcel, 18, 33)
+Local $testcaseACSLoginUrlPath = _ExcelReadCell($oExcel, 18, 34)
+Local $testcaseACSserverUrlPath = _ExcelReadCell($oExcel, 18, 35)
+Local $testcaseACSCertiPath = _ExcelReadCell($oExcel, 18, 36)
+Local $testcaseCloud = _ExcelReadCell($oExcel, 18, 37)
+Local $lcl = _ExcelReadCell($oExcel, 18, 38)
+Local $tJDK = _ExcelReadCell($oExcel, 18, 39)
+Local $PFXpath = _ExcelReadCell($oExcel, 18, 40)
+Local $PFXpassword = _ExcelReadCell($oExcel, 18, 41)
+Local $PSFile = _ExcelReadCell($oExcel, 18, 42)
 _ExcelBookClose($oExcel,0)
 Local $exlid = ProcessExists("excel.exe")
 ProcessClose($exlid)
@@ -126,39 +124,54 @@ EndIf
 CreateJavaProject($testCaseProjectName)
 
 ;Creating JSP file and insert code
-CreateJSPFile1()
+CreateJSPFile($testCaseJspName, $testCaseProjectName, $testCaseJspText)
 
 ;Adding External JAR FileChangeDir
 AddExternalJarFile()
 
 ;Create Azure Package
 CreateAzurePackage($testCaseAzureProjectName, $testCaseCheckJdk, $testCaseJdkPath,$testCaseCheckLocalServer, $testCaseServerPath, $testCaseServerNo,$lcl,$tJDK)
-
 Sleep(8000)
+
 ;Enable co-located caching
 EnableCoLocatedCaching()
 
- WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
-Sleep(3000)
 
-Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
- Local $wnd1 = ControlGetHandle($wnd, "", "[CLASS:SysTreeView32; INSTANCE:1]")
- ControlClick($wnd,"",$wnd1,"left")
- Send("^+{NUMPADDIV}")
+;Enable SSL Offloading
+EnableSSLOffloading()
 
-If $testcaseCloud = 1 Then
 ;Publish to Cloud
- ;PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword)
- PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword,$PFXpath,$PFXpassword,$PSFile)
-Sleep(30000)
+;PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword)
+PublishToCloud1()
+Sleep(20000)
 
-Publish($testCaseProjectName,$testCaseValidationText)
+
+For $i = 8 to 1 Step - 1
+   Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
+   Local $wnd1 = ControlGetHandle($wnd, "", "[CLASS:msctls_progress32]")
+   Local $syslk = ControlCommand($wnd, "", $wnd1,"IsVisible", "")
+If $i = 1 and $syslk = 0 Then
+   $cls = "-----Time Out!-----"
+   Close($cls)
+   Exit
 Else
-   Emulator($emulatorURL)
+      ;Send("{Enter}")
+		 If $syslk = 0 Then
+			;Check RDP and Open excel
+			CheckRDPConnection()
+			Sleep(10000)
+			;Check for published key word in Azure activity log and update excel
+			ValidateTextAndUpdateExcel($testCaseProjectName, $testCaseValidationText)
+			sleep(7000)
+			$cls = 1
+			Close($cls)
+   ;Exit
+		 Else
+			Sleep(120000)
+		 EndIf
 EndIf
+Next
 
-
-#cs
 ;*****************************************************************
 ;Function to publish to cloud
 ;****************************************************************
@@ -251,52 +264,24 @@ ControlCommand("Publish Wizard","","[CLASSNN:Button5]","Check", "")
 Send("{TAB}")
 Send("{Enter}")
 
+Sleep(18000)
+Local $act = WinActive("Upload certificate")
+Local $wnd = WinGetHandle("Upload certificate")
+If $wnd > 0 Then    ;Checking the Upload certificate window to upload the PFX file (this fuction is for SSL offloading scenarios)
+ Local $wnd1 = ControlGetHandle($wnd, "", "[CLASS:Edit; INSTANCE:1]")
+ ControlClick($wnd,"",$wnd1,"left")
+ AutoItSetOption ( "SendKeyDelay", 100)
+Send($PFXpath)
+Send("{Tab 2}")
+Send($PFXpassword)
+Send("{tab}")
+Send("{Enter}")
+EndIf
+
+
 EndFunc
 ;*******************************************************************************
-#ce
 
-;***************************************************************
-;Helper Functions
-;***************************************************************
-
-Func CreateJSPFile1()
-sleep(3000)
-Send("{APPSKEY}")
-AutoItSetOption ( "SendKeyDelay", 100)
-Send("{down}")
-Send("{RIGHT}")
-Send("{down 14}")
-Send("{enter}")
-Send($testCaseJspName)
-;Send("{TAB 3}")
-;Send("{Enter}")
-Send("!f")
-Local $temp = "Java EE - " & $testCaseProjectName & "/WebContent/" & $testCaseJspName & " - Eclipse"
-Sleep(3000)
-WinWaitActive($temp)
-Sleep(2000)
-		 Local $win4 = WinActive($temp)
-		 If $win4 = 0 Then
-			$cls = "---Error in Opening: "& $temp &"--------"
-			Send("{Esc}")
-			Close($cls)
-			Exit
-		 EndIf
-
-; Calling the Winchek Function
-Local $funame, $cntrlname
-$cntrlname =  "Java EE - " & $testCaseProjectName & "/WebContent/" & $testCaseJspName & " - Eclipse"
-$funame = "CreateJSPFile"
-wincheck($funame,$cntrlname)
-AutoItSetOption ( "SendKeyDelay", 100)
-Send("^a")
-Send("{Backspace}")
-ClipPut($testCaseJspText)
-Send("^v")
-AutoItSetOption ( "SendKeyDelay", 400)
-Send("^+s")
-EndFunc
-;******************************************************************
 
 ;***************************************************************
 ;Function to add external JAR file
@@ -305,10 +290,10 @@ Func AddExternalJarFile()
 AutoItSetOption ( "SendKeyDelay", 200)
 WinWaitActive("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
 Sleep(3000)
-;MouseClick("primary",105, 395, 1)
 Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
  Local $wnd1 = ControlGetHandle($wnd, "", "[CLASS:SysTreeView32; INSTANCE:1]")
  ControlClick($wnd,"",$wnd1,"left")
+;MouseClick("primary",105, 395, 1)
 Send("{APPSKEY}")
 Sleep(1000)
 Send("b")
@@ -351,11 +336,11 @@ EndFunc
 ;Function to} enable co-located caching
 ;***************************************************************
 Func EnableCoLocatedCaching()
-Sleep(2000)
+Sleep(1500)
 Send("{UP}{ENTER}")
-Sleep(2000)
+Sleep(1500)
 Send("{DOWN 3}")
-Sleep(2000)
+Sleep(1500)
 Send("{APPSKEY}")
 Sleep(1000)
 
@@ -371,6 +356,7 @@ if $JunoOrKep = "Juno" Then
    Send("{Left}{UP}{Enter}")
    Send("{Down}{Enter}")
    WinWaitActive("[Title:Properties for WorkerRole1]")
+   Sleep(2000)
 ControlCommand("Properties for WorkerRole1","","[CLASSNN:Button1]","Check", "")
 ;Send("{TAB}{a}{Right}{Down}{tab 10}")
 Send("{TAB 8}")
@@ -393,5 +379,56 @@ EndFunc
 
 
 
+;****************************************************************
+;Function to enable SSL Offloading
+;***************************************************************
+Func EnableSSLOffloading()
+Sleep(2000)
+AutoItSetOption ( "SendKeyDelay", 100)
+Send("{APPSKEY}")
+;Send("{Up}{Enter}{down}{down}{down}{APPSKEY}")
+Sleep(1000)
+;if $JunoOrKep = "Juno" Then
+;Send("g")
+;Else
+;Send("e")
+;EndIf
+Send("e")
+if $JunoOrKep = "Juno" Then
+Send("{Left}{UP}{Right}{s 2}{Enter}")
+Else
+Send("{s}{Left}{UP}{UP}{Right}{s 2}{Enter}")
+EndIf
+WinWaitActive("[Title:Properties for WorkerRole1]")
+ControlCommand("Properties for WorkerRole1","","[CLASSNN:Button1]","Check", "")
+WinWaitActive("[Title:SSL Offloading]")
+Send("{Enter}")
+Send("{Tab 4}")
+;Dim $hWnd = WinGetHandle("[Title:Properties for WorkerRole1]")
+;MsgBox("","",$hWnd)
+;Local $hToolBar = ControlGetHandle($hWnd, "", "[Text:<a>Certificates...</a>]")
+;MsgBox("","",$hToolBar)
+;ControlClick($hWnd,"",6424586,"left",1)
+ ;MouseClick("primary",1039, 133, 1)
 
+Local $wnd = WinGetHandle("[Title:Properties for WorkerRole1]")
+ Local $wnd1 = ControlGetHandle($wnd, "", "[CLASS:SysLink; INSTANCE:2]")
+ ControlClick($wnd,"",$wnd1,"left")
+WinWaitActive("[Title:Properties for MyAzureProject]")
+Send("{Tab 2}")
+Send("{Enter}")
+WinWaitActive("[Title:Certificate]")
+Send("{Tab 2}")
+Send("{Enter}")
+Sleep(2000)
+Send($testcaseCertificatePath)
+;ClipPut($testcaseCertificatePath)
+Send("!O")
+Send("{Tab 2}")
+Send("{Enter}")
+Send("{Tab}{Enter}")
+Send("{Tab 3}")
+Send("{Enter}")
+EndFunc
+;*********************************************************************
 

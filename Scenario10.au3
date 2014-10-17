@@ -73,7 +73,10 @@ Local $testCasePassword = _ExcelReadCell($oExcel, 17, 28)
 Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 17, 29)
 Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 17, 30)
 Local $testcaseCertificatePath = _ExcelReadCell($oExcel, 17, 31)
+Local $lcl = _ExcelReadCell($oExcel, 17, 38)
 _ExcelBookClose($oExcel,0)
+Local $exlid = ProcessExists("excel.exe")
+ProcessClose($exlid)
 ;*******************************************************************************
 
 ;to do - Pre validation steps

@@ -1,19 +1,18 @@
 ;*******************************************************************
-;Description: Session Affinity
+;Description: ACS+SESSION AFFINITY
 ;
-;Purpose: Creates a Java Project and publish in cloud with staging target
-;Environment and Overwrite previous deployment
+;Purpose:
 ;
-;Date: 10 Jun 2014 , Modified on 12 June 2014
+
 ;Author: Ganesh
 ;Company: Brillio
 ;*********************************************************************
 
 ;********************************************
 ;Include Standard Library
+
 ;*******************************************
 #include <Constants.au3>
-#include <GuiToolbar.au3>
 #include <Excel.au3>
 #include <MsgBoxConstants.au3>
 #include <Array.au3>
@@ -28,6 +27,7 @@
 #include <MsgBoxConstants.au3>
 #include <GuiTreeView.au3>
 #include <File.au3>
+#include <GuiToolbar.au3>
 #include <Testinc.au3>
 ;******************************************
 
@@ -41,12 +41,10 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;To do - move helper function
 ;******************************************************************
 ;Open xls
-Local $sFilePath1 = @ScriptDir & "\" & "TestData.xlsx" ;This file should already exist in the mentioned path
+Local $sFilePath1 =  @ScriptDir & "\" & "TestData.xlsx";This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
-;Dim $oExcel1 = _ExcelBookNew(0)
 
-;Local $sFilePath2 = @ScriptDir & "\" & "Result.xlsx"  ;This file should already exist in the mentioned path
-;Local $oExcel1 = _ExcelBookOpen($sFilePath2,0,False)
+
 
 ;Check for error
 If @error = 1 Then
@@ -59,51 +57,57 @@ ElseIf @error = 2 Then
 
  ; Reading xls data into variables
 ;to do - looping to get the data from desired row of xls
-Local $testCaseIteration = _ExcelReadCell($oExcel, 10, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 10, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 10, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 10, 4)
-Local $JunoOrKep  = _ExcelReadCell($oExcel, 10, 5)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 10, 6)
+;to do - looping to get the data from desired row of xls
+Local $testCaseIteration = _ExcelReadCell($oExcel, 17, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 17, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 17, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 17, 4)
+Local $JunoOrKep  = _ExcelReadCell($oExcel, 17, 5)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 17, 6)
 ;if $JunoOrKep = "Juno" Then
-  ; Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 14, 6)
+  ; Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 16, 6)
 ;Else
-   ;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 14, 7)
+   ;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 16, 7)
    ;EndIf
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 10, 8)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 10, 9)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 10, 10)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 10, 11)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 10, 12)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 10, 13)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 10, 14)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 10, 15)
-Local $testCaseServerPath = _ExcelReadCell($oExcel, 10, 16)
-Local $testCaseServerNo = _ExcelReadCell($oExcel, 10, 17)
-Local $emulatorURL = _ExcelReadCell($oExcel, 10, 18)
-Local $testCaseUrl = _ExcelReadCell($oExcel, 10, 19)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 10, 19)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 10, 20)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 10, 21)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 10, 22)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 10, 23)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 10, 24)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 10, 25)
-Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 10, 28)
-Local $testCaseUserName = _ExcelReadCell($oExcel, 10, 29)
-Local $testCasePassword = _ExcelReadCell($oExcel, 10, 30)
-Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 10, 31)
-Local $testcaseCloud = _ExcelReadCell($oExcel, 10, 37)
-Local $lcl = _ExcelReadCell($oExcel, 10, 38)
-Local $tJDK = _ExcelReadCell($oExcel, 10, 39)
-Local $PFXpath = _ExcelReadCell($oExcel, 10, 40)
-Local $PFXpassword = _ExcelReadCell($oExcel, 10, 41)
-Local $PSFile = _ExcelReadCell($oExcel, 10, 42)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 17, 8)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 17, 9)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 17, 10)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 17, 11)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 17, 12)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 17, 13)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 17, 14)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 17, 15)
+Local $testCaseServerPath = _ExcelReadCell($oExcel, 17, 16)
+Local $testCaseServerNo = _ExcelReadCell($oExcel, 17, 17)
+Local $emulatorURL = _ExcelReadCell($oExcel, 17, 18)
+Local $testCaseUrl = _ExcelReadCell($oExcel, 17, 19)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 17, 19)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 17, 20)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 17, 21)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 17, 22)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 17, 23)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 17, 24)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 17, 25)
+Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 17, 28)
+Local $testCaseUserName = _ExcelReadCell($oExcel, 17, 29)
+Local $testCasePassword = _ExcelReadCell($oExcel, 17, 30)
+Local $testcaseNewSessionJSPText = _ExcelReadCell($oExcel, 17, 31)
+Local $testcaseExternalJarPath = _ExcelReadCell($oExcel, 17, 32)
+Local $testcaseCertificatePath = _ExcelReadCell($oExcel, 17, 33)
+Local $testcaseACSLoginUrlPath = _ExcelReadCell($oExcel, 17, 34)
+Local $testcaseACSserverUrlPath = _ExcelReadCell($oExcel, 17, 35)
+Local $testcaseACSCertiPath = _ExcelReadCell($oExcel, 17, 36)
+Local $testcaseCloud = _ExcelReadCell($oExcel, 17, 37)
+Local $lcl = _ExcelReadCell($oExcel, 17, 38)
+Local $tJDK = _ExcelReadCell($oExcel, 17, 39)
+Local $PFXpath = _ExcelReadCell($oExcel, 17, 40)
+Local $PFXpassword = _ExcelReadCell($oExcel, 17, 41)
+Local $PSFile = _ExcelReadCell($oExcel, 17, 42)
 _ExcelBookClose($oExcel,0)
 Local $exlid = ProcessExists("excel.exe")
 ProcessClose($exlid)
 ;*******************************************************************************
-;*******************************************************************************
+
 
 Start($testCaseName,$testCaseDescription);Calling Start function from Testinc.au3 script(Custom Script file, Contains common functions that are used in other scripts)
 
@@ -115,22 +119,21 @@ Else
  Delete()
 EndIf
 
-;Create javaProject
+
+;Creating Java Project
 CreateJavaProject($testCaseProjectName)
 
-;create JSP file
-CreateSessionJSPFile()
+;Configure
+Configure()
+Sleep(3000)
 
-WinActivate("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
-  Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
-   Local $htoolBar =  ControlGetHandle($wnd, '','[CLASS:SWT_Window0; INSTANCE:14]')
-   Sleep(3000)
-   _GUICtrlToolbar_ClickIndex($htoolBar, 0,"Left")
+;Creating JSP file and insert code
+CreateSessionJSPFile()
 
 ;CreateAzurePackage
 CreateAzurePackage($testCaseAzureProjectName, $testCaseCheckJdk, $testCaseJdkPath,$testCaseCheckLocalServer, $testCaseServerPath, $testCaseServerNo,$lcl,$tJDK)
-
-Sleep(3000)
+Sleep(5000)
+;for Enabling Session Affinity option
 Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse")
  Local $wnd1 = ControlGetHandle($wnd, "", "[CLASS:SysTreeView32; INSTANCE:1]")
  ControlClick($wnd,"",$wnd1,"left")
@@ -156,16 +159,51 @@ Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse
 
 
 If  $testcaseCloud = 1  Then
-;Publish to Cloud
+   ;Publish to Cloud
 ;PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword)
 PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword,$PFXpath,$PFXpassword,$PSFile)
-;Wait for 30 seconds
-Sleep(30000)
+Sleep(20000)
+;Publish
 Publish($testCaseProjectName,$testCaseValidationText)
 Else
-Emulator($emulatorURL)
+  Emulator($emulatorURL)
 EndIf
 
+
+
+
+;**************************************Configuring***************************************************
+Func Configure()
+   ;Configuring
+Send("{APPSKEY}")
+Send("B")
+Send("{Right}")
+Send("c")
+Send("{Tab 3}")
+Send("l")
+Send("!a")
+Send("!n")
+Send("{Tab 6}")
+Send("^a {Delete}")
+AutoItSetOption ( "SendKeyDelay", 50)
+Send($testcaseACSLoginUrlPath)
+AutoItSetOption ( "SendKeyDelay", 400)
+Send("{Tab}")
+AutoItSetOption ( "SendKeyDelay", 50)
+Send($testcaseACSserverUrlPath)
+AutoItSetOption ( "SendKeyDelay", 400)
+Send("{tab 2} {Enter}")
+AutoItSetOption ( "SendKeyDelay", 50)
+Send($testcaseACSCertiPath)
+AutoItSetOption ( "SendKeyDelay", 400)
+Send("{Enter}")
+;Send("{Tab 3}{Space}{Tab}{Space}{Enter}{Tab 2}{Enter}")
+Send("{Tab 6}{Enter}")
+Sleep(2000)
+Send("{Enter}")
+Send("!{F4}")
+;Send("{Enter}")
+EndFunc
 
 ;***************************************************************
 ;Function to create JSP file and insert code

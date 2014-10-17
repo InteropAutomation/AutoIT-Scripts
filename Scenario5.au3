@@ -1,10 +1,10 @@
 ;*******************************************************************
-;Description: Publish-Overwrite previous deployment-ON
+;Description: Publish-Overwrite previous deployment-Off
 ;
 ;Purpose: Creates a Java Project and publish in cloud with Production target
-;Environment and Overwrite previous deployment ON
+;Environment and Overwrite previous deployment Off
 ;
-;Date: 3 Jun 2014 , Modified on 12 June 2014
+;Date: 4 Jun 2014 , Modified on 12 June 2014
 ;Author: Ganesh
 ;Company: Brillio
 ;*********************************************************************
@@ -13,7 +13,6 @@
 ;Include Standard Library
 ;*******************************************
 #include <Constants.au3>
-#include <MsgBoxConstants.au3>
 #include <Excel.au3>
 #include <MsgBoxConstants.au3>
 #include <Array.au3>
@@ -42,9 +41,10 @@ AutoItSetOption ( "SendKeyDelay", 400)
 ;To do - move helper function
 ;******************************************************************
 ;Open xls
-Local $sFilePath1 = @ScriptDir & "\" & "TestData.xlsx" ;This file should already exist in the mentioned path
+Local $sFilePath1 = @ScriptDir & "\" & "TestData.xlsx";This file should already exist in the mentioned path
 Local $oExcel = _ExcelBookOpen($sFilePath1,0,True)
-;Dim $oExcel1 = _ExcelBookNew(0)
+;Local $oExcel1 = _ExcelBookNew(0)
+
 ;Local $sFilePath2 = @ScriptDir & "\" & "Result.xlsx"  ;This file should already exist in the mentioned path
 ;Local $oExcel1 = _ExcelBookOpen($sFilePath2,0,False)
 
@@ -59,49 +59,47 @@ ElseIf @error = 2 Then
 
  ; Reading xls data into variables
 ;to do - looping to get the data from desired row of xls
-Local $testCaseIteration = _ExcelReadCell($oExcel, 7, 1)
-Local $testCaseExecute = _ExcelReadCell($oExcel, 7, 2)
-Local $testCaseName = _ExcelReadCell($oExcel, 7, 3)
-Local $testCaseDescription = _ExcelReadCell($oExcel, 7, 4)
-Local $JunoOrKep  = _ExcelReadCell($oExcel, 7, 5)
-Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 7, 6)
+Local $testCaseIteration = _ExcelReadCell($oExcel, 8, 1)
+Local $testCaseExecute = _ExcelReadCell($oExcel, 8, 2)
+Local $testCaseName = _ExcelReadCell($oExcel, 8, 3)
+Local $testCaseDescription = _ExcelReadCell($oExcel, 8, 4)
+Local $JunoOrKep  = _ExcelReadCell($oExcel, 8, 5)
+Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 8, 6)
 ;if $JunoOrKep = "Juno" Then
-   ;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 7, 6)
+  ; Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 8, 6)
 ;Else
-   ;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 7, 7)
+   ;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 8, 7)
    ;EndIf
-;Local $testCaseEclipseExePath = _ExcelReadCell($oExcel, 6, 6)
-Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 7, 8)
-Local $testCaseProjectName = _ExcelReadCell($oExcel, 7, 9)
-Local $testCaseJspName = _ExcelReadCell($oExcel, 7, 10)
-Local $testCaseJspText = _ExcelReadCell($oExcel, 7, 11)
-Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 7, 12)
-Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 7, 13)
-Local $testCaseJdkPath = _ExcelReadCell($oExcel, 7, 14)
-Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 7, 15)
-Local $testCaseServerPath = _ExcelReadCell($oExcel, 7, 16)
-Local $testCaseServerNo = _ExcelReadCell($oExcel, 7, 17)
-Local $testCaseUrl = _ExcelReadCell($oExcel, 7, 18)
-Local $testCaseValidationText = _ExcelReadCell($oExcel, 7, 19)
-Local $testCaseSubscription = _ExcelReadCell($oExcel, 7, 20)
-Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 7, 21)
-Local $testCaseServiceName = _ExcelReadCell($oExcel, 7, 22)
-Local $testCaseTargetOS = _ExcelReadCell($oExcel, 7, 23)
-Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 7, 24)
-Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 7, 25)
-Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 7, 28)
-Local $testCaseUserName = _ExcelReadCell($oExcel, 7, 29)
-Local $testCasePassword = _ExcelReadCell($oExcel, 7, 30)
-Local $lcl = _ExcelReadCell($oExcel, 7, 38)
-Local $tJDK = _ExcelReadCell($oExcel, 7, 39)
-Local $PFXpath = _ExcelReadCell($oExcel, 7, 40)
-Local $PFXpassword = _ExcelReadCell($oExcel, 7, 41)
-Local $PSFile = _ExcelReadCell($oExcel, 7, 42)
+Local $testCaseWorkSpacePath = _ExcelReadCell($oExcel, 8, 8)
+Local $testCaseProjectName = _ExcelReadCell($oExcel, 8, 9)
+Local $testCaseJspName = _ExcelReadCell($oExcel, 8, 10)
+Local $testCaseJspText = _ExcelReadCell($oExcel, 8, 11)
+Local $testCaseAzureProjectName = _ExcelReadCell($oExcel, 8, 12)
+Local $testCaseCheckJdk = _ExcelReadCell($oExcel, 8, 13)
+Local $testCaseJdkPath = _ExcelReadCell($oExcel, 8, 14)
+Local $testCaseCheckLocalServer = _ExcelReadCell($oExcel, 8, 15)
+Local $testCaseServerPath = _ExcelReadCell($oExcel, 8, 16)
+Local $testCaseServerNo = _ExcelReadCell($oExcel, 8, 17)
+Local $testCaseUrl = _ExcelReadCell($oExcel, 8, 18)
+Local $testCaseValidationText = _ExcelReadCell($oExcel, 8, 19)
+Local $testCaseSubscription = _ExcelReadCell($oExcel, 8, 20)
+Local $testCaseStorageAccount = _ExcelReadCell($oExcel, 8, 21)
+Local $testCaseServiceName = _ExcelReadCell($oExcel, 8, 22)
+Local $testCaseTargetOS = _ExcelReadCell($oExcel, 8, 23)
+Local $testCaseTargetEnvironment = _ExcelReadCell($oExcel, 8, 24)
+Local $testCaseCheckOverwrite = _ExcelReadCell($oExcel, 8, 25)
+Local $testCaseJDKOnCloud = _ExcelReadCell($oExcel, 8, 28)
+Local $testCaseUserName = _ExcelReadCell($oExcel, 8, 29)
+Local $testCasePassword = _ExcelReadCell($oExcel, 8, 30)
+Local $lcl = _ExcelReadCell($oExcel, 8, 38)
+Local $tJDK = _ExcelReadCell($oExcel, 8, 39)
+Local $PFXpath = _ExcelReadCell($oExcel, 8, 40)
+Local $PFXpassword = _ExcelReadCell($oExcel, 8, 41)
+Local $PSFile = _ExcelReadCell($oExcel, 8, 42)
 _ExcelBookClose($oExcel,0)
 Local $exlid = ProcessExists("excel.exe")
 ProcessClose($exlid)
 ;*******************************************************************************
-
 
 
 Start($testCaseName,$testCaseDescription);Calling Start function from Testinc.au3 script(Custom Script file, Contains common functions that are used in other scripts)
@@ -117,7 +115,7 @@ Else
 EndIf
 
 ;Create javaProject
-;CreateJavaProject($testCaseProjectName)
+
 
 ;create JSP file
 CreateJSPFile($testCaseJspName, $testCaseProjectName, $testCaseJspText)
