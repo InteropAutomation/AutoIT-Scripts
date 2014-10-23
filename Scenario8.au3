@@ -152,7 +152,7 @@ If $testcaseCloud = 1 Then
  PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword,$PFXpath,$PFXpassword,$PSFile)
 Sleep(30000)
 
-Publish($testCaseProjectName,$testCaseValidationText)
+Publish($testCaseProjectName,$testCaseValidationText,0)
 Else
    Emulator($emulatorURL)
 EndIf

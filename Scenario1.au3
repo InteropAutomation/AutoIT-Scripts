@@ -151,7 +151,7 @@ PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceN
 Sleep(30000)
 
 Local $int = 8
-Publish($testCaseProjectName,$testCaseValidationText)
+Publish($testCaseProjectName,$testCaseValidationText,0)
 
 #cs
 For $i = 8 to 1 Step - 1

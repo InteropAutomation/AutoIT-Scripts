@@ -130,7 +130,7 @@ PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceN
 ;Wait for 10 min RDP screen
 Sleep(30000)
 
-Publish($testCaseProjectName,$testCaseValidationText)
+Publish($testCaseProjectName,$testCaseValidationText,0)
 #cs
 
 For $i = 8 to 1 Step - 1

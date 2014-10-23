@@ -144,7 +144,7 @@ Local $wnd = WinGetHandle("Java EE - MyHelloWorld/WebContent/index.jsp - Eclipse
 PublishToCloud($testCaseSubscription, $testCaseStorageAccount, $testCaseServiceName, $testCaseTargetOS, $testCaseTargetEnvironment, $testCaseCheckOverwrite, $testCaseUserName, $testCasePassword,$PFXpath,$PFXpassword,$PSFile)
 Sleep(30000)
 
-Publish($testCaseProjectName,$testCaseValidationText)
+Publish($testCaseProjectName,$testCaseValidationText,1)
 ;**************************************Configuring***************************************************
 Func Configure()
    ;Configuring
